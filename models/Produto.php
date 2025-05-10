@@ -12,5 +12,5 @@ interface ProdutoDAOInterface {
     public function inserir(Produto $produto);
     public function atualizar(Produto $produto);
     public function deletar(Produto $produto);
-    public function filtrar($nome = null, $descricao = null, $preco = null, $qtd = null)
+    public function filtrar($nome = null, $descricao = null, $preco = null, $qtd = null);
 }

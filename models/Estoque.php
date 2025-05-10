@@ -7,9 +7,7 @@ public class Estoque {
 }
 
 interface EstoqueDAOInterface {
-    public function inserir($produto, $qtd = 0);
-    public function atualizar($produto, $produtoVelho);
-    public function deletar($produto);
-    public function procurarPorNome($nome);
-    public function filtrarPorEstoque($qtd);
+    public function inserir(Estoque $estoque);
+    public function atualizar(Estoque $estoque);
+    public function deletar(Estoque $estoque);
 }

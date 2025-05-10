@@ -1,6 +1,6 @@
 <?php
 
-public class Estoque {
+class Estoque {
     public $CDESTUSUARIO;
     public $CDESTPROD;
     public $CDESTQTD;

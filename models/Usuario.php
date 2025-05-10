@@ -6,6 +6,15 @@ class Usuario {
     public $CDUSEMAIL;
     public $CDUSCEL;
     public $CDUSSENHA;
+    public $CDUSTOKEN;
+
+    public function generateToken() {
+        return bin2hex(random_bytes(50));
+    }
+
+    public function generateSenha($senha) {
+        return password_hash($senha, PASSWORD_DEFAULT);
+    }
 }
 
 interface UsuarioDAOInterface {
@@ -15,4 +24,7 @@ interface UsuarioDAOInterface {
     public function deletar(Usuario $usuario);
     public function procurarPorId($id);
     public function procurarPorEmail($email);
+    public function procurarPorToken($token);
+    public function destruirToken();
+    public function changeSenha(Usuario $usuario);
 }

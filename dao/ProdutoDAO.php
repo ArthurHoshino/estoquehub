@@ -50,7 +50,7 @@ class ProdutoDAO implements ProdutoDAOInterface {
                 CDPRODNOME = :CDPRODNOME,
                 CDPRODDESC = :CDPRODDESC,
                 CDPRODPRECO = :CDPRODPRECO
-                WHERE CDPRODID = CDPRODID
+                WHERE CDPRODID = :CDPRODID
             ");
 
             $stmt->bindParam(":CDPRODNOME", $produto->CDPRODNOME);

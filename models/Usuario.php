@@ -26,5 +26,5 @@ interface UsuarioDAOInterface {
     public function procurarPorEmail($email);
     public function procurarPorToken($token);
     public function destruirToken();
-    public function changeSenha(Usuario $usuario);
+    public function troarSenha(Usuario $usuario);
 }

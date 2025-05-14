@@ -81,26 +81,21 @@ class ProdutoDAO implements ProdutoDAOInterface {
         }
     }
 
-    public function filtrar($CDUSID, $CDPRODID, $nome = null, $descricao = null, $preco = null, $qtd = null) {
+    public function filtrar($CDUSID, $filtroOpt = null, $filtroValor = null) {
         try {
             $produtosRetorno = [];
-            $whereQuery = "";
-            $whereQuery .= $nome      != null ? ($whereQuery == "" ? "WHERE CDPRODNOME = :CDPRODNOME " : "AND CDPRODNOME = :CDPRODNOME ") : "";
-            $whereQuery .= $descricao != null ? ($whereQuery == "" ? "WHERE CDPRODDESC = :CDPRODDESC " : "AND CDPRODDESC = :CDPRODDESC ") : "";
-            $whereQuery .= $preco     != null ? ($whereQuery == "" ? "WHERE CDPRODPRECO = :CDPRODPRECO " : "AND CDPRODPRECO = :CDPRODPRECO ") : "";
-
+            $whereQry = $filtroOpt != null ? " AND $filtroOpt = :$filtroOpt" : "";
             $query = "SELECT * FROM CDPRODUTO
-                    INNER JOIN CDESTOQUE ON CDESTPRODID = :CDPRODID
-                    AND CDESTUSUARIOID = :CDUSID
-                    $whereQuery";
+                    INNER JOIN CDESTOQUE ON CDESTPRODID = CDPRODID
+                    WHERE CDESTUSUARIOID = :CDUSID
+                    $whereQry";
 
             $stmt = $this->conn->prepare($query);
 
-            $stmt->bindParam(":CDPRODID", $CDPRODID);
             $stmt->bindParam(":CDUSID", $CDUSID);
-            if ($nome != null)      $stmt->bindParam(":CDPRODNOME", $nome);
-            if ($descricao != null) $stmt->bindParam(":CDPRODDESC", $descricao);
-            if ($preco != null)     $stmt->bindParam(":CDPRODPRECO", $preco);
+            if ($filtroOpt != null) {
+                $stmt->bindParam(":$filtroOpt", $filtroValor);
+            }
 
             $stmt->execute();
 

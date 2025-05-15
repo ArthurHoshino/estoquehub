@@ -12,5 +12,5 @@ interface ProdutoDAOInterface {
     public function inserir(Produto $produto);
     public function atualizar(Produto $produto);
     public function deletar($CDPRODID);
-    public function filtrar($CDUSID, $filtroOpt, $filtroValor);
+    public function filtrar($CDUSID, $filtroOpt, $filtroValor, $offset);
 }

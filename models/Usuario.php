@@ -19,12 +19,14 @@ class Usuario {
 
 interface UsuarioDAOInterface {
     public function buildUsuario($data);
-    public function inserir(Usuario $usuario, $userAuth = false);
-    public function atualizar(Usuario $usuario, $redirect = true);
-    public function deletar(Usuario $usuario);
+    public function inserir(Usuario $usuario);
+    public function atualizar($id, $nome, $cel);
+    public function deletar($id);
     public function procurarPorId($id);
     public function procurarPorEmail($email);
     public function procurarPorToken($token);
-    public function destruirToken();
-    public function troarSenha(Usuario $usuario);
+    public function destruirToken($id);
+    public function trocarSenha($id, $novaSenha);
+    public function autenticarUsuario($email, $senha)
+    public function verificarToken();
 }

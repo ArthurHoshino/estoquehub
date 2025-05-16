@@ -1,11 +1,60 @@
-<?php include_once("./config/global.php"); ?>
-
+<?php require_once("./config/global.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EstoqueHub - Gerenciamento de Estoque Simplificado</title>
+    <link rel="stylesheet" href="<?= $BASE_URL ?>/assets/css/index.css" />
+    <link rel="stylesheet" href="<?= $BASE_URL ?>/assets/css/base.css" />
+    <link rel="stylesheet" href="<?= $BASE_URL ?>/assets/css/mobile-menu.css" />
+    <script src="../scripts/main.js"></script>
 </head>
+
 <body>
-    <h1>Testando Header</h1>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">
+                    <!-- Logo SVG Embutido -->
+                    <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" width="150" height="40">
+                        <!-- Fundo do logo -->
+                        <rect x="10" y="15" width="50" height="50" rx="8" fill="#3498db" />
+
+                        <!-- Elementos de estoque (caixas) -->
+                        <rect x="20" y="25" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                        <rect x="35" y="40" width="15" height="15" rx="2" fill="white" opacity="0.9" />
+                        <rect x="20" y="40" width="15" height="15" rx="2" fill="white" opacity="0.7" />
+
+                        <!-- Nome da empresa -->
+                        <text x="70" y="50" font-family="Segoe UI, sans-serif" font-size="28" font-weight="bold"
+                            fill="#333333">
+                            <tspan fill="#3498db">Estoque</tspan>
+                            <tspan fill="#2c3e50">Hub</tspan>
+                        </text>
+
+                        <!-- Slogan opcional -->
+                        <text x="70" y="65" font-family="Segoe UI, sans-serif" font-size="12" fill="#7f8c8d">Gestão de
+                            estoque simplificada</text>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Menu para desktop -->
+            <nav class="desktop-nav">
+                <a href="<?= $BASE_URL ?>/registro.php" class="animated-link">Registro</a>
+                <a href="<?= $BASE_URL ?>/login.php" class="animated-link">Login</a>
+            </nav>
+
+            <!-- Botão do menu mobile -->
+            <button id="mobile-menu-toggle" class="hamburger-button" aria-label="Abrir menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="4" width="24" height="2" fill="black" />
+                    <rect y="11" width="24" height="2" fill="black" />
+                    <rect y="18" width="24" height="2" fill="black" />
+                </svg>
+
+            </button>
+        </div>
+    </header>

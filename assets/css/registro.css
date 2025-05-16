@@ -1,0 +1,24 @@
+/* Variáveis de Cores */
+:root {
+    --primary-color: #3498db; /* Cor principal, azul */
+    --secondary-color: #7f8c8d; /* Cor secundária, cinza escuro */
+    --background-color: #e6e6e6; /* Cor de fundo do body */
+    --form-background-color: #fafafa; /* Cor do fundo do formulário */
+    --form-shadow-color: rgba(0, 0, 0, 0.08); /* Cor da sombra do formulário */
+    --highlight-color: #f4f6fb; /* Cor de destaque para o texto abaixo do botão */
+    --alert-color: #e74c3c; /* Cor de alerta (vermelho) */
+}
+
+/* Cor de fundo */
+body {
+    background-color: var(--background-color) !important;
+}
+
+aside a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+aside a:hover {
+    text-decoration: underline;
+}

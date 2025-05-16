@@ -1,0 +1,466 @@
+/* Variáveis de Cores */
+:root {
+    --primary-color: #3498db;
+    /* Cor principal, azul */
+    --secondary-color: #7f8c8d;
+    /* Cor secundária, cinza escuro */
+    --background-color: #e6e6e6;
+    /* Cor de fundo do body */
+    --form-background-color: #fafafa;
+    /* Cor do fundo do formulário */
+    --form-shadow-color: rgba(0, 0, 0, 0.08);
+    /* Cor da sombra do formulário */
+    --highlight-color: #f4f6fb;
+    /* Cor de destaque para o texto abaixo do botão */
+    --alert-color: #e74c3c;
+    /* Cor de alerta (vermelho) */
+}
+
+/* Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Botões */
+.normal-button {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+/* botão especifico do perfil  */
+.perfil-button.normal-button {
+  width: 500px; 
+  display: block;       
+  margin: 20px auto 0;   
+}
+
+.botoes-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center; 
+}
+
+.normal-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.normal-button:active {
+    transform: translateY(0);
+}
+
+/* Links animados no menu */
+.animated-link {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.animated-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
+
+.animated-link:hover:after {
+    width: 100%;
+}
+
+main {
+    padding: 0 15px;
+}
+
+.copyright {
+    margin-top: 20px;
+}
+
+/* Header */
+header {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 0;
+    z-index: 1000;
+    transition: transform 2s ease-in-out;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .desktop-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.obrigatorio-alerta {
+    margin-top: 12px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--alert-color);
+    background-color: #f3848450;
+    padding: 12px;
+    border-left: 4px solid var(--alert-color);
+    border-radius: 4px;
+    text-align: left;
+}
+
+/* Texto abaixo do botão */
+aside {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    background-color: var(--highlight-color);
+    padding: 12px;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Cor de fundo */
+body {
+    background-color: var(--background-color) !important;
+}
+
+aside a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+aside a:hover {
+    text-decoration: underline;
+}
+
+/* Texto abaixo do botão */
+aside {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    background-color: #f4f6fb;
+    padding: 12px;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    text-align: center;
+}
+
+aside a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+aside a:hover {
+    text-decoration: underline;
+}
+
+
+/* Formulário de Registro */
+.geral-form {
+  background-color: #fafafa;
+  padding: 36px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px;   
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group-senha {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; 
+}
+
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;        
+  flex-wrap: wrap;   
+  margin: 50px auto;
+  max-width: 1700px; 
+}
+
+  .campo-readonly {
+    background-color: #f0f0f0; 
+    color: #666;              
+    opacity: 0.7;            
+    cursor: not-allowed;      
+  }
+
+@media (max-width: 991px) {
+    .geral-form {
+        width: auto;
+    }
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 220px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+
+.contact-form {
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+
+.password-form {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.geral-form label {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.geral-form input {
+    padding: 10px 12px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    width: auto;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.geral-form input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Estilos responsivos para telas menores */
+@media (max-width: 480px) {
+    .geral-form {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        min-width: 100%;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .contact-form,
+    .password-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    aside {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+}
+
+/* Estilos para telas maiores (ex: desktop) */
+@media (min-width: 1024px) {
+    .geral-form {
+        margin: 100px auto;
+        padding: 36px 30px;
+    }
+
+    .form-row {
+        gap: 20px;
+    }
+
+    .contact-form,
+    .password-form {
+        flex-direction: row;
+    }
+}
+
+
+
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #f8f9fa;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+footer .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+footer .footer-info p {
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+footer h3:after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: #3498db;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+}
+
+.contact-link {
+    color: #3498db;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Garantir que todos os caminhos SVG nos ícones sociais sejam brancos */
+.social-icon svg path,
+.social-icon svg #WhatsApp {
+    fill: #ffffff !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none !important;
+    }
+
+    header .hamburger-button {
+        display: block;
+    }
+
+    footer .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    footer h3:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .socials {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 769px) {
+    header .hamburger-button {
+        display: none;
+    }
+}

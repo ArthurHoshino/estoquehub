@@ -13,6 +13,10 @@ class ProdutoDAO implements ProdutoDAOInterface {
         $this->message = new Message($url);
     }
 
+    /** Criar o objeto do Produto
+     *
+     * @param array $data Id do usuário que será usado para buscar o produto
+     */
     public function buildProduto ($data) {
         $prod = new Produto();
 
@@ -23,6 +27,10 @@ class ProdutoDAO implements ProdutoDAOInterface {
         return $prod;
     }
 
+    /** Query para inserir um produto
+     *
+     * @param int $CDPRODID Id do usuário que será usado para buscar o produto
+     */
     public function inserir(Produto $produto) {
         try {
             $stmt = $this->conn->prepare("
@@ -39,10 +47,14 @@ class ProdutoDAO implements ProdutoDAOInterface {
             $this->message->setMessage("Produto inserido com sucesso", "success", "dashboard.php");
         } catch (Exception $ex) {
             $ex->getMessage();
-            $this->message->setMessage("Aconteceu um erro: " . $ex->getMessage(), "error", "back");
+            $this->message->setMessage("Aconteceu um erro", "error", "back");
         }
     }
 
+    /** Query para atualizar um produto
+     *
+     * @param int $CDPRODID Id do usuário que será usado para buscar o produto
+     */
     public function atualizar(Produto $produto) {
         try {
             $stmt = $this->conn->prepare("
@@ -63,10 +75,14 @@ class ProdutoDAO implements ProdutoDAOInterface {
             $this->message->setMessage("Produto atualizado com sucesso", "success", "dashboard.php");
         } catch (Exception $ex) {
             $ex->getMessage();
-            $this->message->setMessage("Aconteceu um erro: " . $ex->getMessage(), "error", "back");
+            $this->message->setMessage("Aconteceu um erro", "error", "back");
         }
     }
 
+    /** Query para deletar um produto
+     *
+     * @param int $CDPRODID Id do usuário que será usado para buscar o produto
+     */
     public function deletar($CDPRODID) {
         try {
             $stmt = $this->conn->prepare("DELETE FROM CDPRODUTO WHERE CDPRODID = :CDPRODID");
@@ -77,39 +93,68 @@ class ProdutoDAO implements ProdutoDAOInterface {
 
             $this->message->setMessage("Produto deletado com sucesso", "success", "dashboard.php");
         } catch (Exception $ex) {
-            $this->message->setMessage("Aconteceu um erro: " . $ex->getMessage(), "error", "back");
+            $this->message->setMessage("Aconteceu um erro", "error", "back");
         }
     }
 
-    public function filtrar($CDUSID, $filtroOpt = null, $filtroValor = null) {
+    /** Query de busca dos produtos para listagem na dashboard
+     *
+     * @param int $CDUSID O id do usuário para buscar o estoque dele
+     * @param string $filtroOpt A coluna a qual o filtro será aplicado
+     * @param string $filtroValor O valor que será usado no filtro
+     * @param int $offset A página da tabela
+     *
+     * @return array Os resultados da busca
+     */
+    public function filtrar($CDUSID, $filtroOpt=null, $filtroValor=null, $offset=0) {
         try {
             $produtosRetorno = [];
-            $whereQry = $filtroOpt != null ? " AND $filtroOpt = :$filtroOpt" : "";
-            $query = "SELECT * FROM CDPRODUTO
+            $porPagina = 7;
+            $totalItens = 0;
+            $whereQry  = $filtroOpt != null ? " AND $filtroOpt = :$filtroOpt" : "";
+            $qryTotalItens = "SELECT COUNT(*) FROM CDESTOQUE WHERE CDESTUSUARIOID = :CDUSID";
+            $qryItensPagina = "SELECT * FROM CDPRODUTO
                     INNER JOIN CDESTOQUE ON CDESTPRODID = CDPRODID
                     WHERE CDESTUSUARIOID = :CDUSID
-                    $whereQry";
+                    $whereQry
+                    ORDER BY CDPRODDESC
+                    LIMIT :PORPAGINA OFFSET :OFFSET";
 
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($qryItensPagina);
 
             $stmt->bindParam(":CDUSID", $CDUSID);
+            $stmt->bindColumn(":PORPAGINA", $porPagina);
             if ($filtroOpt != null) {
                 $stmt->bindParam(":$filtroOpt", $filtroValor);
+            }
+            if ($offset != null) {
+                $stmt->bindParam(":OFFSET", $offset * $porPagina);
             }
 
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
+                $stmtTotalItens = $this->conn->prepare($qryTotalItens);
+                $stmtTotalItens->bindParam(":CDUSID", $CDUSID);
+                $stmtTotalItens->execute();
                 $prodArray = $stmt->fetchAll();
+                $totalItens = $stmtTotalItens->fetchColumn();
 
                 foreach ($prodArray as $p) {
                     $produtosRetorno[] = $this->buildProduto($p);
                 }
             }
 
-            return $produtosRetorno;
+            $objRetorno = [
+                "produtos" => $produtosRetorno,
+                "totalItens" => $totalItens,
+                "porPagina" => $porPagina,
+                "paginaAtual" => ($offset + 1)
+            ];
+
+            return $objRetorno;
         } catch (Exception $ex) {
-            $this->message->setMessage("Aconteceu um erro: " . $ex->getMessage(), "error", "back");
+            $this->message->setMessage("Aconteceu um erro", "error", "back");
         }
     }
 }
